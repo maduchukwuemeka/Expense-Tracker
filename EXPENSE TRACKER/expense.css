@@ -1,0 +1,125 @@
+body{
+    font-family: Arial,sans-serif, Helvetica, sans-serif;
+    background: #f4f6f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    margin: 0;
+}
+
+.container{
+    width: 350px;
+    background-color: #f4f6f8;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 3px 8px black ;
+}
+h2{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.income-expense{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 6px;
+}
+
+.plus{
+    color: green;
+}
+.minus{
+    color: red;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+form input, form button{
+    padding: 10px;
+    margin: 6px 0px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+}
+button{
+    background: #1a73ef;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.list{
+
+    margin: 0;
+    padding: 0;    
+    width: 100%;
+
+}
+
+
+.list tr.income{ border-color: green;
+
+}
+.list tr.expense{ border-color: red;
+
+}
+
+tr{border-left: 4px solid;
+    padding-left: 1px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 3px;
+    /* justify-items: left; */
+}
+
+th{
+        font-family: Arial,sans-serif, Helvetica, sans-serif;
+        font-weight: bold;
+        font-style: italic;
+        font-size: small;
+        text-align: left;
+
+}
+
+#tr{
+    border: none;
+}
+
+
+#filterOptionType{
+    margin: 0;
+    padding: 0;
+    
+}
+
+#history{
+    margin-bottom: 0;
+    display: inline;
+}
+td{
+    display: flex;
+    text-align: left;
+    font-size: small;
+    justify-content: space-between;
+    
+}
+
+td> button{margin-left: 4px;
+
+}
+
+#checkboxDiv{
+    width: 100%;
+    display: flex;
+    background-color: rgb(252, 241, 241);
+    justify-content: center;
+    border-radius: 5px;
+}
+

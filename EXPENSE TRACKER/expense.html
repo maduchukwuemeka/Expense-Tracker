@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker
+    </title>
+        <noscript>does not support javascript</noscript>
+
+    <link rel="stylesheet" href="expense.css    ">
+</head>
+<body>
+    
+    <div class="container"> 
+        <h2>Expense Tracker</h2>
+        <div id="balance">
+            <h3>Your Balance</h3>
+            <h1 id="balance-amount"> $0.00</h1>
+        </div>
+        <div class="income-expense">
+
+            <div>
+            <h4>Income</h4>
+            <div><p id="income" class="money plus"> 0.00</p></div>
+        
+        </div>
+        
+        <div>
+            <h4>Expenses</h4>
+            <p id="expense" class="money minus">-$0.00</p>
+        </div>
+        </div>
+    <h3>Add Transaction</h3>
+
+<form action="" id="form">
+    <select name="" id="budgetOptionType" >
+        <option value="" selected hidden disabled id="defaultSelect">Select Transaction Type</option>
+        <option value="Expense" id="expenseOption">Expense</option>
+        <option value="Income" id="incomeOption">Income</option>
+
+    </select> 
+    <input type="text" id="category" placeholder="Enter category" required >
+    <input type="text" id="title" placeholder="Budget Name" required>
+    <input type="number" id="amount" placeholder="Enter amount" required min="0">
+    <button type="button" form="form" id="button"> Add Transaction</button>
+    </form>
+    
+     
+    
+          <div id="checkboxDiv">      <input type="checkbox" name="" id="historyCheckBox">
+        <label for="historyCheckBox">show History</label></div>
+      <div id="historyId" hidden>
+
+        <h3 id="history">History</h3>
+
+    <select name="" id="filterOptionType" value="" hidden>
+        <option value="" hidden disabled>Filter Category by</option>
+        <option value="All" hidden id="allBudget"> allBudget</option>
+    </select>
+    
+        <table id="list" class="list" hidden>
+        <tr id="tr" >
+            <th>Title</th>
+            <th>Amount</th>
+            <th> Category</th>
+
+        </tr>
+
+    </table>
+    
+    
+    </div>
+
+    <script  src="expense.js" type="module"></script>
+
+</body>
+</html> 
