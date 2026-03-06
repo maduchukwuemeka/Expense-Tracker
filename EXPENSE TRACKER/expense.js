@@ -1,6 +1,6 @@
-// importing the transaction Class from Transaction Module
+// importing the transaction Class from the Transaction Module
 import { _Transaction } from "./model/transaction.js";
-import { trim, checkbalance,editValueOfBudget } from "./utils/helpers.js";
+import { trim, checkbalance,editValueOfBudget,CategoryNameBalance,categoryName } from "./utils/helpers.js";
 import { saveToStorage, loadFromStorage} from "./Service/storage.js"
 import { createList } from "./utils/create_expense.js";
 import { pushIntoCategoryDropdown,creatCategoryDropdown } from "./utils/create_category_dropdown.js";
@@ -22,9 +22,14 @@ let balance = document.getElementById("balance-amount")
 let checkHistoryBox = document.getElementById("historyCheckBox")
 let historyDiv = document.getElementById("historyId")
 let allBudget = document.getElementById("allBudget")
+let tbody =document.getElementById("tbody")
+let expenseText =document.getElementById('expenseText')
+let incomeText = document.getElementById('incomeText')
+let balanceText = document.getElementById('balance')
 
 let expenseTrackerArray //all expenses
 let budgetCategory
+let catgoryName
 
 //showing history or not
 checkHistoryBox.addEventListener('click',renderTransactions)
@@ -49,7 +54,7 @@ let transaction = new _Transaction(trim(title), transactionAmount.value,budgetOp
 
 
 //appending a new budget to the budget list
-createList(allExpense,[transaction], expenseTrackerArray,saveToStorage, getTotalIncome, getTotalExpense, getBalance, budgetCategory,categoryOption, loadFromStorage)
+createList(tbody,[transaction], expenseTrackerArray,saveToStorage, getTotalIncome, getTotalExpense, getBalance, budgetCategory,categoryOption, loadFromStorage)
 expenseTrackerArray.push(transaction)
 allExpense.hidden =false
 
@@ -106,17 +111,16 @@ function renderTransactions(){
 
 //to calculate the total income
 function getTotalIncome(){
-    let incomeTrack = expenseTrackerArray.filter(e => e.type != 'Expense').reduce((firstVal,secondval) => Number(firstVal) +Number(secondval.amount),0)
+    let incomeTrack = Array.from(tbody.rows).filter(e => e.className !== 'expense' && e.style.display !='none').reduce((firstVal,secondval) => Number(firstVal) +Number(secondval.cells[1].textContent),0)
 incomeSum.innerHTML = `+$${incomeTrack}`
 return incomeSum.textContent
 
 
 }
 
-
-//calculating total expenses
+//calculating total expensess
 function getTotalExpense(){
-let expenseTrack = expenseTrackerArray.filter(e => e.type == 'Expense').reduce((firstVal,secondval) => Number(firstVal) +Number(secondval.amount),0)
+let expenseTrack = Array.from(tbody.rows).filter(e => e.className == 'expense' && e.style.display !='none' ).reduce((firstVal,secondval) => Number(firstVal) +Number(secondval.cells[1].textContent),0)
 expenseSum.innerHTML = `-$${expenseTrack}`
 return expenseSum.textContent
 }
@@ -134,14 +138,15 @@ function loadDOM()
 {
     //initializing the expenseTrackerArray
     try{
-
         expenseTrackerArray = loadFromStorage("expenseTrackerArray")
         budgetCategory = loadFromStorage("budgetCategory")
         creatCategoryDropdown(categoryOption,budgetCategory)
-        createList(allExpense,expenseTrackerArray, expenseTrackerArray,saveToStorage, getTotalIncome, getTotalExpense, getBalance, budgetCategory,categoryOption,loadFromStorage)
+        createList(tbody,expenseTrackerArray, expenseTrackerArray,saveToStorage, getTotalIncome, getTotalExpense, getBalance, budgetCategory,categoryOption,loadFromStorage)
         getTotalExpense()
         getTotalIncome()
         getBalance()
+
+
 
         //making the table not hidden
         if(Array.from(allExpense.children).length > 1){
@@ -163,7 +168,7 @@ if (budgetCategory.length >1){
     
 }
 
-//getting the exporting the util
+//getting the exporting of the util
 export function cloneArray(Arr){
     return JSON.parse(JSON.stringify(Arr))
 }
@@ -172,7 +177,7 @@ export function cloneArray(Arr){
 //filtering
 function filteri(e){
     
-if (categoryOption.value !== "All" && categoryOption.value !== ""){
+if (categoryOption.value !== "Net" && categoryOption.value !== ""){
     
     allBudget.hidden = false 
 
@@ -185,11 +190,18 @@ if (categoryOption.value !== "All" && categoryOption.value !== ""){
     e.childNodes[0].parentElement.parentElement.style.display ="flex"
    }
 })
+
 }
 else{Array.from(document.getElementsByClassName("td_categories")).map(e =>{
      e.childNodes[0].parentElement.parentElement.style.display ="flex"
     })}
 
+getTotalExpense()
+getTotalIncome()
+getBalance()
+categoryName(categoryOption,incomeText)
+categoryName(categoryOption,expenseText)
+CategoryNameBalance(categoryOption, balanceText)
 
 // Array.from(allExpense.rows).map(e =>{
 //   Array.from( ((e.cells)[2].childNodes[0])).map(e=>{
