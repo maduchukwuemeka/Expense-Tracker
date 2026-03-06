@@ -13,20 +13,20 @@
     
     <div class="container"> 
         <h2>Expense Tracker</h2>
-        <div id="balance">
-            <h3>Your Balance</h3>
+        <div >
+            <h3 id="balance">Net Balance</h3>
             <h1 id="balance-amount"> $0.00</h1>
         </div>
         <div class="income-expense">
 
             <div>
-            <h4>Income</h4>
+            <h4 id="incomeText">Net Income</h4>
             <div><p id="income" class="money plus"> 0.00</p></div>
         
         </div>
         
         <div>
-            <h4>Expenses</h4>
+            <h4 id="expenseText">Net Expenses</h4>
             <p id="expense" class="money minus">-$0.00</p>
         </div>
         </div>
@@ -55,16 +55,19 @@
 
     <select name="" id="filterOptionType" value="" hidden>
         <option value="" hidden disabled>Filter Category by</option>
-        <option value="All" hidden id="allBudget"> allBudget</option>
+        <option value="Net" hidden id="allBudget"> allBudget</option>
     </select>
     
         <table id="list" class="list" hidden>
-        <tr id="tr" >
+            <thead>
+                <tr id="tr" >
             <th>Title</th>
             <th>Amount</th>
             <th> Category</th>
-
         </tr>
+            </thead>
+
+        <tbody id="tbody"></tbody>
 
     </table>
     
