@@ -1,5 +1,5 @@
 //exporting the funtion
-export {trim,checkbalance, editValueOfBudget}
+export {trim,checkbalance, editValueOfBudget,categoryName,CategoryNameBalance}
 
 
 
@@ -22,4 +22,15 @@ function editValueOfBudget(init, budget){
     let num = Number (init.textContent.slice(2))
    init.textContent = budget.type == "Expense" ? "-$"  + ( Math.abs( num - budget.amount)).toString() : "+$" + Math.abs((num + budget.amount).toString())
    return init
+}
+
+function categoryName(name, pos){
+    let Name = pos.id == 'incomeText' ? "Income" : "Expenses"
+    pos.textContent = `${name.value} ${Name}`
+}
+
+function CategoryNameBalance(name, pos){
+        pos.textContent = `${name.value} Balance`
+        pos.style.font
+
 }
