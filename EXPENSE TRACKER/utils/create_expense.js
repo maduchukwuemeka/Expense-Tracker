@@ -2,28 +2,33 @@
 export {createList}
 
 //creating the function that will add new budget into he budget List
-function createList(allExpense,expenseClass,expenseTrackerArray, saveToStorage, getTotalIncome, getTotalExpense, getBalance,budgetCategory,categoryOption,loadFromStorage ){
+function createList(tbody,expenseClass,expenseTrackerArray, saveToStorage, getTotalIncome, getTotalExpense, getBalance,budgetCategory,categoryOption,loadFromStorage ){
 for (let expense of expenseClass){
-    let expenseRow = document.createElement('tr')
+    let expenseRow = tbody.insertRow(-1)
 
 //checking what type of list is to be created
 expense.type == "Expense" ? expenseRow.classList.add('expense') : expenseRow.classList.add('income') //end of type
 
-
-//creating amount column
-let expenseListAmount = document.createElement('td')
-expenseListAmount.textContent = expense.amount
-
-
 //creating title column
-let expenseListTitle = document.createElement('td')
+let expenseListTitle = expenseRow.insertCell(-1)
 expenseListTitle.textContent = expense.title
 
+//creating amount column
+let expenseListAmount = expenseRow.insertCell(-1)
+expenseListAmount.textContent = expense.amount
 
 //creating the button column
 let expenseListButton = document.createElement('button')
 expenseListButton.textContent = "x"
 expenseListButton.id = Date()
+
+//creating the category colum
+let expenseCategory = expenseRow.insertCell(-1)
+expenseCategory.textContent = expense.categories
+expenseCategory.className ='td_categories'
+expenseCategory.appendChild(expenseListButton)
+
+
 
 
 //setting the delete button when clicked
@@ -65,11 +70,7 @@ if (budgetCategory.length <2){
    
 }//end of button clicked
 
-//creating the category colum
-let expenseCategory = document.createElement('td')
-expenseCategory.textContent = expense.categories
-expenseCategory.className ='td_categories'
-expenseCategory.appendChild(expenseListButton)
+
 
 //appending the amount and delete button
 expenseRow.appendChild(expenseListTitle)
@@ -77,7 +78,6 @@ expenseRow.appendChild(expenseListAmount)
 expenseRow.appendChild(expenseCategory)
 
 
-allExpense.appendChild(expenseRow)
 
 
 
